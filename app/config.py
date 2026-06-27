@@ -1,5 +1,6 @@
 import os 
 from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 
@@ -8,8 +9,17 @@ class Config:
     DB_PASSWORD = os.getenv("DB_PASSWORD")
     DB_NAME = os.getenv("DB_NAME")
     DB_HOST = os.getenv("DB_HOST")
-    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")
-    JWT_KEY_TIMEOUT = os.getenv("JET_KWY_TIMEOUT")
-
-
     
+  
+
+
+    SQLALCHEMY_DATABASE_URI = (
+        f"mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+    )
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY")
+    JWT_KEY_TIMEOUT= timedelta(
+        minutes=int(os.getenv("JWT_KEY_TIMEOUT_MINUTES"))
+    )
+
+
